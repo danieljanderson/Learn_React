@@ -17,6 +17,9 @@
       // where does this prop come from?
       props.handleSizeChange(evt.target.value);
     }
+    function onColorChange(evt) {
+      props.handleColorChange(evt.target.value);
+    }
 
     return (
       <div className="field-group">
@@ -46,7 +49,11 @@
     return (
       <div className="field-group">
         <label htmlFor="color-options">Color:</label>
-        <select defaultValue={props.color} name="colorOptions" id="color-options">
+        <select
+          defaultValue={props.color}
+          name="colorOptions"
+          id="color-options"
+          onChange={onColorChange}>
           {colorOptions()}
         </select>
       </div>
@@ -68,10 +75,16 @@
       };
     },
     handleSizeChange: function(selectedSize) {
-      console.log("parent handleSizeChange", selectedSize);
       var availableColors = window.Inventory.bySize[selectedSize];
       this.setState({
         colors: availableColors
+      });
+    },
+    handleColorChange: function(selectedColor) {
+      var availableSizes = window.Inventory.byColor[selectedColor];
+      this.setState({
+        sizes: availableSizes,
+        color: selectedColor
       });
     },
     render: function() {
@@ -86,7 +99,11 @@
               sizes={this.state.sizes}
               handleSizeChange={this.handleSizeChange}
             />
-            <ColorSelector color={this.state.color} colors={this.state.colors} />
+            <ColorSelector
+              color={this.state.color}
+              colors={this.state.colors}
+              handleColorChange={this.handleColorChange}
+            />
           </div>
         </div>
       );
