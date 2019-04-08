@@ -17,9 +17,6 @@
       // where does this prop come from?
       props.handleSizeChange(evt.target.value);
     }
-    function onColorChange(evt) {
-      props.handleColorChange(evt.target.value);
-    }
 
     return (
       <div className="field-group">
@@ -44,6 +41,9 @@
           </option>
         );
       });
+    }
+    function onColorChange(evt) {
+      props.handleColorChange(evt.target.value);
     }
 
     return (
